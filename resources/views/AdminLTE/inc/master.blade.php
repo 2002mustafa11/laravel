@@ -50,7 +50,7 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
-
+      @auth
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route('user.logout') }}" class="nav-link">loguot</a>
       </li>
@@ -60,13 +60,25 @@
       </li>
 
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ route( 'min.show',['min'=> $user->id]) }}" class="nav-link">show</a>
+      </li>
+
+      <li class="nav-item d-none d-sm-inline-block">
         <form action="{{ url('min',['id'=>$user]) }}" method="post">
           @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-primary btn-block">destroy </button>
         </form>
-        {{-- <a href="{{ route( 'min.destroy',['id' => $user]) }}" class="nav-link">destroy</a> --}}
+        {{-- <a href="{{ route( 'min.destroy',['id' => $user]) }}" class="nav-link">destroy</a>--}} 
       </li>
+      @endauth
+
+
+      @guest
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ url('login') }}" class="nav-link">login</a>
+      </li>
+      @endguest
     </ul>
 
     <!-- Right navbar links -->

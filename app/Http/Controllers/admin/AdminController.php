@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        
+        return view('AdminLTE.login');
     }
 
     /**
@@ -44,9 +44,10 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($id)
     {
-        
+        $user=User::where('id',$id)->first();
+        return  view('AdminLTE.profile')->with('user', $user);
     }
 
     /**
@@ -54,6 +55,7 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
+        $id=User::find($id);
         return view('AdminLTE/recover-password')->with('user', $id);
     }
 
@@ -72,7 +74,7 @@ class AdminController extends Controller
     
     $user->password = bcrypt($validatedData['password']);
     $user->save();
-
+    // $user->update($validatedData);
     
     return redirect('/');
 }
