@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::view('/','AdminLTE.index');
 //Route::get('/{id}','AdminController@index');
-Route::resource('min', 'admin\AdminController');
+Route::resource('min', 'admin\AdminController')->middleware('auth');
 Route::post('/login','admin\loginController@index')->name('login')->middleware('guest');
 Route::get('/user/logout', 'AdminController@logout')->name('user.logout');
 Route::get('/login', 'admin\AdminController@index')->middleware('guest');
